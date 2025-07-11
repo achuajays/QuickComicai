@@ -1,0 +1,6 @@
+{
+  "name": "QuickComic.ai",
+  "description": "Generate a short comic strip from your story ideas. Describe a character, setting, problem, and solution, and watch as AI brings your 3-panel comic to life with unique illustrations and dialogue.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}
