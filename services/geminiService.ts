@@ -79,7 +79,7 @@ export const generateStoryAndImagePrompts = async (inputs: StoryInputs): Promise
 
 export const generateImage = async (prompt: string): Promise<string> => {
   const response = await ai.models.generateImages({
-    model: 'imagen-3.0-generate-002',
+    model: 'gemini-2.0-flash-preview-image-generation',
     prompt: prompt,
     config: {
       numberOfImages: 1,
