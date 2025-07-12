@@ -78,18 +78,20 @@ export const generateStoryAndImagePrompts = async (inputs: StoryInputs): Promise
 };
 
 export const generateImage = async (prompt: string): Promise<string> => {
-  const response = await ai.models.generateImages({
-    model: 'gemini-2.0-flash-preview-image-generation',
+  const response = await together.images.create({
+    model: "black-forest-labs/FLUX.1-schnell-Free",
     prompt: prompt,
-    config: {
-      numberOfImages: 1,
-      outputMimeType: 'image/jpeg',
-      aspectRatio: '16:9',
-    },
+    steps: 10,
+    n: 1
   });
 
-  if (response.generatedImages && response.generatedImages.length > 0) {
-    return response.generatedImages[0].image.imageBytes;
+  if (response.data && response.data.length > 0) {
+    // Together AI returns URLs, we need to fetch and convert to base64
+    const imageUrl = response.data[0].url;
+    const imageResponse = await fetch(imageUrl);
+    const arrayBuffer = await imageResponse.arrayBuffer();
+    const base64 = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
+    return base64;
   } else {
     throw new Error("Image generation failed to return an image.");
   }
