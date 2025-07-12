@@ -87,7 +87,7 @@ export const generateImage = async (prompt: string): Promise<string> => {
   const response = await together.images.create({
     model: "black-forest-labs/FLUX.1-schnell-Free",
     prompt: prompt,
-    steps: 10,
+    steps: 1,
     n: 1
   });
 
