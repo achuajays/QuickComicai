@@ -1,11 +1,17 @@
 import { GoogleGenAI, Type } from "@google/genai";
+import Together from "together-ai";
 import type { StoryInputs, ComicScene } from '../types.ts';
 
-if (!process.env.API_KEY) {
-  throw new Error("API_KEY environment variable not set");
+if (!import.meta.env.VITE_GEMINI_API_KEY) {
+  throw new Error("VITE_GEMINI_API_KEY environment variable not set");
 }
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+if (!import.meta.env.VITE_TOGETHER_API_KEY) {
+  throw new Error("VITE_TOGETHER_API_KEY environment variable not set");
+}
+
+const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
+const together = new Together({ apiKey: import.meta.env.VITE_TOGETHER_API_KEY });
 
 const storySchema = {
   type: Type.ARRAY,
